@@ -2,9 +2,13 @@ import axios from 'axios'
 import { Message } from 'element-ui'
 import config from './config'
 
+if (process.server) {
+  config.baseURL = `http://${process.env.HOST || 'localhost'}:${process.env.PORT || 8085}`
+}
+
 const service = axios.create(config)
 
-// POST传参序列化
+// POST 传参序列化
 service.interceptors.request.use(
   config => {
     if (config.method === 'post') config.data = qs.stringify(config.data)

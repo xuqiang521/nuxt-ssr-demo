@@ -30,6 +30,7 @@
       {{ counter }}
     </div>
     <p>{{ testMsg.name }}</p>
+    <nuxt-link to="about">About Page</nuxt-link>
   </section>
 </template>
 
@@ -57,8 +58,9 @@ export default {
     }
   },
   async asyncData ({ store, error }) {
-    let [ res ] = await Promise.all([
-      store.dispatch('home')
+    let [ res, jj ] = await Promise.all([
+      store.dispatch('home'),
+      store.dispatch('banner')
     ]).catch((e) => {
       error({ statusCode: 404, message: 'Post not found' })
     })

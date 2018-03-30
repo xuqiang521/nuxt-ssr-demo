@@ -44,5 +44,22 @@ module.exports = {
         config.devtool = 'eval-source-map'
       }
     }
+  },
+  modules: [
+    '@nuxtjs/axios'
+  ],
+  axios: {
+    proxy: true
+    // See https://github.com/nuxt-community/axios-module#options
+  },
+  proxy: {
+    '/api': {
+      target: 'http://mixer.video.iqiyi.com',
+      pathRewrite: { '^/api': '' }
+    },
+    '/japi': {
+      target: 'https://banner-storage-ms.juejin.im',
+      pathRewrite: { '^/japi': '' }
+    }
   }
 }
