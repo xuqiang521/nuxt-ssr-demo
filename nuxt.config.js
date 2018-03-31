@@ -14,10 +14,11 @@ module.exports = {
     ]
   },
   css: [
-    '~/assets/main.styl'
+    '~/assets/stylus/main.styl'
   ],
   plugins: [
-    '~/plugins/element-ui'
+    '~/plugins/element-ui',
+    '~/plugins/main-plugin'
   ],
   router: {
     middleware: 'auth'

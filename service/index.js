@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { Message } from 'element-ui'
+import qs from 'qs'
 import config from './config'
 
 if (process.server) {

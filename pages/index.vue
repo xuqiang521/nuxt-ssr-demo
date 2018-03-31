@@ -5,42 +5,20 @@
 </style>
 
 <template>
-  <section class="container">
-    <div>
-      <app-logo/>
-      <h1 class="title">
-        nuxt-ssr
-      </h1>
-      <h2 class="subtitle">
-        Nuxt.js project
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green">Documentation</a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey">GitHub</a>
-      </div>
-    </div>
-    <div class="v-increment">
-      <el-button @click="clickFn">increment</el-button>
-      {{ counter }}
-    </div>
-    <p>{{ testMsg.name }}</p>
-    <nuxt-link to="about">About Page</nuxt-link>
-  </section>
+  <div class="section">
+
+  </div>
 </template>
 
 <script>
 import AppLogo from '~/components/AppLogo'
+import VHeader from '~/components/home/header'
 import { mapState } from 'vuex'
 
 export default {
   components: {
-    AppLogo
+    AppLogo,
+    VHeader
   },
   data () {
     return {
@@ -49,11 +27,9 @@ export default {
   },
   head () {
     return {
-      title: this.title,
-      // 为了避免子组件中的meta标签不能正确覆盖父组件中相同的标签而产生重复的现象，
-      // 利用 hid 键为meta标签配一个唯一的标识编号
+      title: '首页',
       meta: [
-        { hid: 'test custom title', name: 'test', content: 'test custom title description' }
+        { hid: 'home custom title', name: 'home', content: 'home custom title description' }
       ]
     }
   },
@@ -64,6 +40,7 @@ export default {
     ]).catch((e) => {
       error({ statusCode: 404, message: 'Post not found' })
     })
+    console.log(jj)
     return {
       testMsg: res.base
     }

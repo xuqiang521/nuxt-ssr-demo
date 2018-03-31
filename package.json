@@ -6,9 +6,9 @@
   "private": true,
   "scripts": {
     "dev": "PORT=8085 nuxt",
-    "build": "nuxt build",
+    "build": "npm run lint && nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate",
+    "generate": "npm run lint && nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "precommit": "npm run lint"
   },
@@ -19,12 +19,19 @@
   "devDependencies": {
     "@nuxtjs/axios": "^5.1.1",
     "@nuxtjs/proxy": "^1.1.4",
-    "babel-eslint": "^8.2.1",
+    "babel-eslint": "^8.2.2",
     "element-ui": "^2.2.2",
-    "eslint": "^4.15.0",
+    "eslint": "^4.19.1",
+    "eslint-config-standard": "^11.0.0",
     "eslint-friendly-formatter": "^3.0.0",
     "eslint-loader": "^1.7.1",
+    "eslint-plugin-html": "^4.0.2",
+    "eslint-plugin-import": "^2.10.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.7.0",
+    "eslint-plugin-standard": "^3.0.1",
     "eslint-plugin-vue": "^4.0.0",
+    "qs": "^6.5.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2"
   }
