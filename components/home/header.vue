@@ -1,4 +1,5 @@
-<style lang="stylus" scoped>
+<style lang="stylus">
+@import '../../assets/stylus/header'
 .v-header {
   position fixed
   top 0

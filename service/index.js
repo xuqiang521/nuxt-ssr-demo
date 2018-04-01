@@ -56,7 +56,7 @@ export default {
     return service({
       method: 'post',
       url,
-      data
+      params: data
     })
   },
   get (url, data) {
@@ -64,7 +64,7 @@ export default {
     return service({
       method: 'get',
       url,
-      data
+      params: data
     })
   },
   delete (url, data) {
@@ -72,7 +72,7 @@ export default {
     return service({
       methods: 'delete',
       url,
-      data
+      params: data
     })
   }
 }

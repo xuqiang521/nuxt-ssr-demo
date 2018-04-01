@@ -54,7 +54,7 @@ a {
   }
 }
 
-a, label, button, input, select {
+a, label, button, input, select, {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
@@ -94,13 +94,6 @@ input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0 1000px white inset;
 }
 
-// input[type=search]{
-//   -webkit-appearance: none;
-// }
-// input[type=search]::-webkit-search-cancel-button{
-//     -webkit-appearance: none; //此处只是去掉默认的小×
-// }
-
 input[type=search],input[type=tel],input[type=text],input {
   -webkit-appearance: none;  /*去除系统默认的样式*/
   -webkit-box-sizing: content-box;
@@ -121,21 +114,4 @@ textarea {
   overflow: auto;
   resize: none;
   font: 100% tahoma, "\5b8b\4f53", arial;
-}
-
-// 地图重置z-index级别
-.amap-toolbar{
-  z-index: 1 !important;
-  .amap-touch-toolbar .amap-zoomcontrol{
-    z-index: 2 !important;
-  }
-}
-.amap-copyright{
-  z-index:2;
-}
-.amap-scalecontrol{
-    z-index:2;
-}
-.amap-logo{
-    z-index:2;
 }

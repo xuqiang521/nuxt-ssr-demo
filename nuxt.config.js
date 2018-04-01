@@ -55,12 +55,16 @@ module.exports = {
   },
   proxy: {
     '/api': {
-      target: 'http://mixer.video.iqiyi.com',
+      target: 'https://banner-storage-ms.juejin.im',
       pathRewrite: { '^/api': '' }
     },
     '/japi': {
-      target: 'https://banner-storage-ms.juejin.im',
+      target: 'https://gold-tag-ms.juejin.im',
       pathRewrite: { '^/japi': '' }
+    },
+    '/rapi': {
+      target: 'https://recommender-api-ms.juejin.im',
+      pathRewrite: { '^/rapi': '' }
     }
   }
 }

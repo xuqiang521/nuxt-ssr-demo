@@ -1,7 +1,7 @@
 <style lang="stylus" scoped>
 .repos-page {
   font-size 20px
-  margin-top 30px
+  margin-top 1.767rem
   text-align center
 }
 </style>
