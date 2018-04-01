@@ -28,9 +28,18 @@
     display flex
     -webkit-box-align baseline
     align-items baseline
+    li.nav-item{
+      &:hover {
+        color #007fff  
+      }
+      &:not(:last-child) {
+        margin-right 20px
+      }
+    }
     .nav-item {
       font-size 14px
       color #90979c
+      padding 0 !important
       height initial !important
       line-height initial !important
       .nuxt-link-exact-active {

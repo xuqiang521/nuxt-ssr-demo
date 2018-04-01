@@ -46,7 +46,7 @@
       @input="handleInput"
       @focus="handleFocus"
       @blur="handleBlur">
-    <img v-if="type === 'search'" class="search-icon" :src="searchImg" alt="搜索">
+    <img v-show="type === 'search'" class="search-icon" :src="searchImg" alt="搜索">
   </div>
 </template>
 

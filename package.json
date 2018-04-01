@@ -9,7 +9,7 @@
     "build": "npm run lint && nuxt build",
     "start": "nuxt start",
     "generate": "npm run lint && nuxt generate",
-    "deploy": "npm run generate && gh-pages -d dist",
+    "deploy": "gh-pages -d dist",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "precommit": "npm run lint"
   },

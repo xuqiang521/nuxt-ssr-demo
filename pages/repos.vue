@@ -8,7 +8,7 @@
 
 <template>
   <div class="repos-page">
-    repos
+    开源库页面
   </div>
 </template>
 

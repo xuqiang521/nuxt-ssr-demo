@@ -131,7 +131,7 @@
   <ul class="entry-list" ref="entry">
     <li class="item" v-for="(item, index) in recommends" :key="index">
       <div class="entry">
-        <a href="/" target="_blank" class="entry-link">
+        <a :href="'http://118.25.109.133:81/entry/' + item.objectId" target="_blank" class="entry-link">
           <div class="content-box">
             <div class="info-box">
               <div class="info-row title-row">
@@ -148,7 +148,7 @@
                 </ul>
               </div>
             </div>
-            <div class="thumb" v-if="item.screenshot">
+            <div class="thumb" v-show="item.screenshot">
               <img :src="item.screenshot">
             </div>
           </div>
@@ -217,17 +217,17 @@ export default {
         document.getElementsByClassName('to-top-btn')[0].classList.remove('show')
       }
       // console.log(containerHeight, $el.scrollTop + clienHeight, clienHeight)
-      if ($el.scrollTop + clienHeight > containerHeight && this.scrollStatus) {
-        this.scrollStatus = false
-        this.$store.dispatch('recommend', params).then(
+      if ($el.scrollTop + clienHeight > containerHeight - 10 && self.scrollStatus) {
+        self.scrollStatus = false
+        self.$store.dispatch('recommend', params).then(
           res => {
             const { d, m, s } = res
             if (s === 1) {
-              this.recommends = [...this.recommends, ...d]
+              self.recommends = [...self.recommends, ...d]
               containerHeight = ~~(window.getComputedStyle($entry, null).getPropertyValue('height').split('px')[0]) + 140
               // console.log('containerHeight', containerHeight)
             } else {
-              this.$message({
+              self.$message({
                 message: m,
                 type: 'warning'
               })
@@ -235,7 +235,7 @@ export default {
           }
         ).then(() => {
           setTimeout(() => {
-            this.scrollStatus = true
+            self.scrollStatus = true
           }, 300)
         })
       }
@@ -243,7 +243,7 @@ export default {
     window.onresize = () => {
       clienHeight = $el.clientHeight
       containerHeight = ~~(window.getComputedStyle($entry, null).getPropertyValue('height').split('px')[0]) + 140
-      console.log('clienHeight', clienHeight)
+      // console.log('clienHeight', clienHeight)
     }
   }
 }

@@ -8,7 +8,7 @@
 
 <template>
   <div class="books-page">
-    books
+    小册页面
   </div>
 </template>
 

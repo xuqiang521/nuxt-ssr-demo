@@ -66,5 +66,19 @@ module.exports = {
       target: 'https://recommender-api-ms.juejin.im',
       pathRewrite: { '^/rapi': '' }
     }
+  },
+  generate: {
+    routes: [
+      '/welcome/frontend',
+      '/welcome/android',
+      '/welcome/backend',
+      '/welcome/ai',
+      '/welcome/ios',
+      '/welcome/freebie',
+      '/welcome/article'
+    ],
+    minify: {
+      collapseWhitespace: false
+    }
   }
 }

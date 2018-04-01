@@ -1,7 +1,14 @@
+<style lang="stylus" scoped>
+.events-page {
+  font-size 20px
+  margin-top 1.767rem
+  text-align center
+}
+</style>
+
 <template>
-  <div class="events-all-page">
-    events
-    <!-- <nuxt-link to="/"></nuxt-link> -->
+  <div class="events-page">
+    活动页面
   </div>
 </template>
 
@@ -9,7 +16,7 @@
 export default {
   head () {
     return {
-      title: '活动',
+      title: '小册',
       meta: [
         { hid: 'events custom title', name: 'events', content: 'events custom title description' }
       ]
