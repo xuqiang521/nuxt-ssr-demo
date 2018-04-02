@@ -159,6 +159,31 @@
 </template>
 
 <script>
+const getData = (store, self) => {
+  let params = {
+    suid: 'aemu3ZqVijiqQj2QEFiB',
+    ab: 'welcome_3',
+    src: 'web'
+  }
+  return new Promise(resolve => {
+    store.dispatch('recommend', params).then(res => {
+      if (self) {
+        const { d, m, s } = res
+        if (s === 1) {
+          self.recommends.push(...d)
+        } else {
+          self.$message({
+            message: m,
+            type: 'warning'
+          })
+        }
+        self.scrollStatus = true
+      }
+      resolve(res)
+    })
+  })
+}
+
 export default {
   data () {
     return {
@@ -184,66 +209,35 @@ export default {
     }
   },
   async asyncData ({ store, error }) {
-    let params = {
-      suid: 'aemu3ZqVijiqQj2QEFiB',
-      ab: 'welcome_3',
-      src: 'web'
-    }
-    let [ res ] = await Promise.all([
-      store.dispatch('recommend', params)
-    ]).catch((e) => {
-      error({ statusCode: 404, message: 'Post not found' })
-    })
+    let res = await getData(store)
     return {
       recommends: res.d
     }
   },
   mounted () {
-    const self = this
-    const $el = document.documentElement
-    const $entry = self.$refs.entry
-    let clienHeight = $el.clientHeight
-    let containerHeight = ~~(window.getComputedStyle($entry, null).getPropertyValue('height').split('px')[0]) + 140
-
-    const params = {
-      suid: 'aemu3ZqVijiqQj2QEFiB',
-      ab: 'welcome_3',
-      src: 'web'
-    }
-    window.onscroll = () => {
-      if ($el.scrollTop > 120) {
-        document.getElementsByClassName('to-top-btn')[0].classList.add('show')
-      } else {
-        document.getElementsByClassName('to-top-btn')[0].classList.remove('show')
-      }
+    window.addEventListener('scroll', this.onScroll)
+  },
+  destroyed () {
+    window.removeEventListener('scroll', this.onScroll)
+  },
+  methods: {
+    onScroll () {
+      this.timer && clearTimeout(this.timer)
+      this.timer = setTimeout(this.loadMoreData, 300)
+    },
+    loadMoreData () {
+      let $el = document.documentElement
+      let $entry = this.$refs.entry
+      let clienHeight = $el.clientHeight
+      let containerHeight = ~~(window.getComputedStyle($entry, null).getPropertyValue('height').split('px')[0]) + 140
+      // 设置【返回顶部】显示隐藏
+      document.querySelector('.to-top-btn').classList[$el.scrollTop > 120 ? 'add' : 'remove']('show')
       // console.log(containerHeight, $el.scrollTop + clienHeight, clienHeight)
-      if ($el.scrollTop + clienHeight > containerHeight - 10 && self.scrollStatus) {
-        self.scrollStatus = false
-        self.$store.dispatch('recommend', params).then(
-          res => {
-            const { d, m, s } = res
-            if (s === 1) {
-              self.recommends = [...self.recommends, ...d]
-              containerHeight = ~~(window.getComputedStyle($entry, null).getPropertyValue('height').split('px')[0]) + 140
-              // console.log('containerHeight', containerHeight)
-            } else {
-              self.$message({
-                message: m,
-                type: 'warning'
-              })
-            }
-          }
-        ).then(() => {
-          setTimeout(() => {
-            self.scrollStatus = true
-          }, 300)
-        })
+      // 滚动到一定高度，重新加载数据
+      if ($el.scrollTop + clienHeight > containerHeight - 10 && this.scrollStatus) {
+        this.scrollStatus = false
+        getData(this.$store, this)
       }
-    }
-    window.onresize = () => {
-      clienHeight = $el.clientHeight
-      containerHeight = ~~(window.getComputedStyle($entry, null).getPropertyValue('height').split('px')[0]) + 140
-      // console.log('clienHeight', clienHeight)
     }
   }
 }
