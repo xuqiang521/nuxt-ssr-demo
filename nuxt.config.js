@@ -65,6 +65,10 @@ module.exports = {
     '/rapi': {
       target: 'https://recommender-api-ms.juejin.im',
       pathRewrite: { '^/rapi': '' }
+    },
+    '/tapi': {
+      target: 'https://timeline-merger-ms.juejin.im',
+      pathRewrite: { '^/tapi': '' }
     }
   },
   generate: {

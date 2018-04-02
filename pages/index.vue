@@ -88,7 +88,7 @@
     <div class="feed welcome_feed">
       <nav class="category-nav">
         <h5>热门文章</h5>
-        <div class="more">查看更多</div>
+        <div class="more" @click="handleMore">查看更多</div>
         <ul class="nav-list">
           <li class="nav-item" v-for="(category, index) in categories" :key="index">
             <nuxt-link :to="category.router">{{ category.title }}</nuxt-link>
@@ -147,6 +147,12 @@ export default {
     },
     goTop () {
       document.documentElement.scrollTop = 0
+    },
+    handleMore () {
+      this.$message({
+        message: 'sorry，暂未完成此功能哟 ~',
+        type: 'warning'
+      })
     }
   }
 }

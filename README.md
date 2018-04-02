@@ -1,22 +1,38 @@
-# nuxt-ssr-demo
+## 项目介绍
 
-> Nuxt.js project
+**高仿掘金，项目中整合 vue + nuxt + axios + vuex + vue-router (nuxt 自带 vuex 和 vue-router)，一个基于 Nuxt 的服务器端渲染 Demo**
 
-## Build Setup
+## 效果图
+
+### PC 端
+
+![](https://raw.githubusercontent.com/xuqiang521/xuqiang521.github.io/master/images/blog/nuxt/pc.gif)
+
+### 移动端
+
+![](https://raw.githubusercontent.com/xuqiang521/xuqiang521.github.io/master/images/blog/nuxt/mobile.gif)
+
+## 构建步骤
 
 ``` bash
-# install dependencies
+# 安装依赖
 $ npm install # Or yarn install
 
-# serve with hot reload at localhost:3000
+# 启动服务，访问 localhost:8085
 $ npm run dev
 
-# build for production and launch server
+# 生成环境打包
 $ npm run build
 $ npm start
 
-# generate static project
+# 打包需要部署的静态页面
 $ npm run generate
 ```
 
-For detailed explanation on how things work, checkout the [Nuxt.js docs](https://github.com/nuxt/nuxt.js).
+## 最后
+
+如果对次项目有任何问题，欢迎进群一起交流，前端交流群：731175396
+
+如果觉得这个项目有点意思，欢迎 star
+
+当然，如果你想和我一起玩这个项目，先进群，然后我和你讲解思路 ~
