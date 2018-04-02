@@ -70,10 +70,6 @@
 .to-top-btn.show {
   display block
 }
-.loading-more {
-  text-align center
-  margin: 10px
-}
 
 @media (max-width 600px) {
   .category-nav {
@@ -103,9 +99,6 @@
         <v-icon name="android-arrow-dropup" size="16"></v-icon>
       </button>
       <nuxt />
-      <div class="loading-more">
-        <el-button icon="el-icon-loading">正在加载</el-button>
-      </div>
     </div>
   </div>
 </template>
