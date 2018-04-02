@@ -187,7 +187,8 @@ const getData = (store, self) => {
 export default {
   data () {
     return {
-      scrollStatus: true
+      scrollStatus: true,
+      recommends: []
     }
   },
   filters: {
@@ -216,10 +217,10 @@ export default {
   },
   mounted () {
     this.getFullPageData()
-    window.addEventListener('scroll', this.onScroll)
+    window.addEventListener('scroll', this.handleScroll)
   },
   destroyed () {
-    window.removeEventListener('scroll', this.onScroll)
+    window.removeEventListener('scroll', this.handleScroll)
   },
   methods: {
     getFullPageData () {
@@ -229,7 +230,7 @@ export default {
         })
       }
     },
-    onScroll () {
+    handleScroll () {
       this.timer && clearTimeout(this.timer)
       this.timer = setTimeout(this.loadMoreData, 300)
     },
