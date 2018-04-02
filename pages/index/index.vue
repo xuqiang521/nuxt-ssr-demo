@@ -215,29 +215,40 @@ export default {
     }
   },
   mounted () {
+    this.getFullPageData()
     window.addEventListener('scroll', this.onScroll)
   },
   destroyed () {
     window.removeEventListener('scroll', this.onScroll)
   },
   methods: {
+    getFullPageData () {
+      if (document.body.offsetHeight < window.innerHeight) {
+        this.loadMoreData().then(() => {
+          this.getFullPageData()
+        })
+      }
+    },
     onScroll () {
       this.timer && clearTimeout(this.timer)
       this.timer = setTimeout(this.loadMoreData, 300)
     },
     loadMoreData () {
-      let $el = document.documentElement
-      let $entry = this.$refs.entry
-      let clienHeight = $el.clientHeight
-      let containerHeight = ~~(window.getComputedStyle($entry, null).getPropertyValue('height').split('px')[0]) + 140
-      // 设置【返回顶部】显示隐藏
-      document.querySelector('.to-top-btn').classList[$el.scrollTop > 120 ? 'add' : 'remove']('show')
-      // console.log(containerHeight, $el.scrollTop + clienHeight, clienHeight)
-      // 滚动到一定高度，重新加载数据
-      if ($el.scrollTop + clienHeight > containerHeight - 10 && this.scrollStatus) {
-        this.scrollStatus = false
-        getData(this.$store, this)
-      }
+      return new Promise((resolve) => {
+        let $el = document.documentElement
+        let $entry = this.$refs.entry
+        let clienHeight = $el.clientHeight
+        let containerHeight = ~~(window.getComputedStyle($entry, null).getPropertyValue('height').split('px')[0]) + 140
+        // 设置【返回顶部】显示隐藏
+        document.querySelector('.to-top-btn').classList[$el.scrollTop > 120 ? 'add' : 'remove']('show')
+        // console.log(containerHeight, $el.scrollTop + clienHeight, clienHeight)
+        // 滚动到一定高度，重新加载数据
+        if ($el.scrollTop + clienHeight > containerHeight - 10 && this.scrollStatus) {
+          getData(this.$store, this).then(res => {
+            resolve(res)
+          })
+        }
+      })
     }
   }
 }
