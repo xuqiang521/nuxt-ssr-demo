@@ -5,8 +5,8 @@
   "author": "qiangdada",
   "private": true,
   "scripts": {
-    "dev": "PORT=8085 nuxt",
-    "build": "npm run lint && nuxt build",
+    "dev": "nuxt",
+    "build": "npm run lint && nuxt build && npm start",
     "start": "nuxt start",
     "generate": "npm run lint && nuxt generate",
     "deploy": "gh-pages -d dist",

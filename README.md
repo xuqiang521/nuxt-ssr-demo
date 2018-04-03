@@ -20,7 +20,7 @@
 # 安装依赖
 $ npm install # Or yarn install
 
-# 启动服务，访问 localhost:8085
+# 启动服务，访问 localhost:3000
 $ npm run dev
 
 # 生成环境打包
