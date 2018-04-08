@@ -18,12 +18,16 @@
 import ListItem from '~/components/home/list-item'
 import TitleRow from '~/components/home/title-row'
 import MetaRow from '~/components/home/meta-row'
+import {getRecommendData} from '~/service'
+
+const pubParams = {
+  suid: 'aemu3ZqVijiqQj2QEFiB',
+  ab: 'welcome_3',
+  src: 'web'
+}
+
 const getData = (store, self) => {
-  let params = {
-    suid: 'aemu3ZqVijiqQj2QEFiB',
-    ab: 'welcome_3',
-    src: 'web'
-  }
+  let params = pubParams
   return new Promise(resolve => {
     store.dispatch('recommend', params).then(res => {
       if (self) {
@@ -55,8 +59,8 @@ export default {
       recommends: []
     }
   },
-  async asyncData ({ store, error }) {
-    let res = await getData(store)
+  async asyncData ({ app, error }) {
+    let res = await getRecommendData(app, pubParams)
     return {
       recommends: res.d
     }
