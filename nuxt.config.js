@@ -17,6 +17,7 @@ module.exports = {
     '~/assets/stylus/main.styl'
   ],
   plugins: [
+    '~/plugins/axios',
     '~/plugins/element-ui',
     '~/plugins/main-plugin'
   ],
@@ -50,7 +51,8 @@ module.exports = {
     '@nuxtjs/axios'
   ],
   axios: {
-    proxy: true
+    proxy: true,
+    baseURL: `http://${process.env.HOST || '127.0.0.1'}:${process.env.PORT || 3000}`
     // See https://github.com/nuxt-community/axios-module#options
   },
   proxy: {

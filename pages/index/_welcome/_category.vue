@@ -20,10 +20,10 @@ import ListItem from '~/components/home/list-item'
 import TitleRow from '~/components/home/title-row'
 import MetaRow from '~/components/home/meta-row'
 import ActionRow from '~/components/home/action-row'
+import {getEntriesData} from '~/service'
 
-const getData = (store, params, self) => {
-  let category = ''
-  switch (params.category) {
+const handleParams = (category) => {
+  switch (category) {
     case 'frontend':
       category = '5562b415e4b00c57d9b94ac8'
       break
@@ -53,6 +53,11 @@ const getData = (store, params, self) => {
     ab: 'welcome_3',
     src: 'web'
   }
+  return param
+}
+
+const getData = (store, params, self) => {
+  let param = handleParams(params.category)
   return new Promise(resolve => {
     store.dispatch('entries', param).then(res => {
       if (self) {
@@ -85,8 +90,9 @@ export default {
       entries: []
     }
   },
-  async asyncData ({ store, params }) {
-    let res = await getData(store, params)
+  async asyncData ({ app, params }) {
+    let sendParams = handleParams(params.category)
+    let res = await getEntriesData(app, sendParams)
     return {
       entries: res.d.entrylist
     }
