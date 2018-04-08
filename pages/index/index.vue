@@ -8,7 +8,7 @@
 <template>
   <ul class="entry-list" ref="entry">
     <list-item v-for="(item, index) in recommends" :key="index" :item="item">
-      <title-row :item="item"></title-row>
+      <title-row :title="item.title"></title-row>
       <meta-row :item="item" :show-category="true"></meta-row>
     </list-item>
   </ul>
@@ -44,6 +44,7 @@ const getData = (store, self) => {
 }
 
 export default {
+  scrollToTop: true,
   components: {
     ListItem,
     TitleRow,

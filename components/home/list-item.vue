@@ -51,7 +51,7 @@
             <slot></slot>
           </div>
           <div class="thumb" v-show="item.screenshot">
-            <img :src="item.screenshot">
+            <img :src="handleImgSrc(item.screenshot)">
           </div>
         </div>
       </a>
@@ -66,6 +66,11 @@ export default {
     item: {
       type: Object,
       default: () => {}
+    }
+  },
+  methods: {
+    handleImgSrc (src) {
+      return `${src}?imageView2/1/w/160/h/103`
     }
   }
 }

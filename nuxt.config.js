@@ -69,6 +69,10 @@ module.exports = {
     '/tapi': {
       target: 'https://timeline-merger-ms.juejin.im',
       pathRewrite: { '^/tapi': '' }
+    },
+    '/xapi': {
+      target: 'https://xiaoce-timeline-api-ms.juejin.im',
+      pathRewrite: { '^/xapi': '' }
     }
   },
   generate: {

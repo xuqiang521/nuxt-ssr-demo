@@ -12,8 +12,7 @@
   color #2e3135
   cursor pointer
   &:hover {
-    text-decoration underline
-    color #909090
+    color #007fff
   }
 }
 @media (max-width 600px) {
@@ -25,7 +24,7 @@
 
 <template>
   <div class="info-row title-row">
-    <span class="title">{{ item.title }}</span>
+    <span class="title">{{ title }}</span>
   </div>
 </template>
 
@@ -33,9 +32,9 @@
 export default {
   name: 'TitleRow',
   props: {
-    item: {
-      type: Object,
-      default: () => {}
+    title: {
+      type: String,
+      default: ''
     }
   }
 }

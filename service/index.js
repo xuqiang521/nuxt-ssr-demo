@@ -22,30 +22,9 @@ service.interceptors.request.use(
 // 返回状态判断
 service.interceptors.response.use(
   res => {
-    // if (res.status !== 200) {
-    //   Message({
-    //     showClose: true,
-    //     type: 'warning',
-    //     message: res.data.msg
-    //   })
-    //   return Promise.reject(res)
-    // }
     return res.data
   },
   error => {
-    // if (error.response.status === 403) {
-    //   Message({
-    //     showClose: true,
-    //     type: 'warning',
-    //     message: '用户无权限访问数据，请联系管理员进行授权'
-    //   })
-    // } else {
-    //   Message({
-    //     showClose: true,
-    //     type: 'warning',
-    //     message: error.message
-    //   })
-    // }
     return Promise.reject(error)
   }
 )

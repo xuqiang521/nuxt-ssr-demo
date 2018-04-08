@@ -9,7 +9,7 @@
   <ul class="entry-list" ref="entry">
     <list-item v-for="(item, index) in entries" :key="index" :item="item">
       <meta-row :item="item"></meta-row>
-      <title-row :item="item"></title-row>
+      <title-row :title="item.title"></title-row>
       <action-row :item="item"></action-row>
     </list-item>
   </ul>
@@ -73,6 +73,7 @@ const getData = (store, params, self) => {
 }
 
 export default {
+  scrollToTop: true,
   components: {
     ListItem,
     TitleRow,
