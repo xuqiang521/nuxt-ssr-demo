@@ -2,7 +2,7 @@
 
 **高仿掘金，项目中整合 vue + nuxt + axios + vuex + vue-router (nuxt 自带 vuex 和 vue-router)，一个基于 Nuxt 的服务器端渲染 Demo**
 
-### 前端交流群：731175396
+### 前端交流群：<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=cbc7299cbc5ac88cc77dc76057ace6340d50847e18016a80aa33d45bb6e9462b">731175396</a>
 
 ### [项目线上地址](http://118.25.109.133:82/)
 
