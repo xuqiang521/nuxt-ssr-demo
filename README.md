@@ -4,7 +4,7 @@
 
 ### 前端交流群：<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=cbc7299cbc5ac88cc77dc76057ace6340d50847e18016a80aa33d45bb6e9462b">731175396</a>
 
-### [项目线上地址](http://118.25.109.133:82/)
+### [项目线上地址](http://www.qiangdada.cn/)
 
 ## 完成功能列表
 
@@ -489,8 +489,8 @@ upstream nodenuxt {
     keepalive 64;
 }
 server {
-  listen 82;
-  server_name 118.25.109.133;
+  listen 80;
+  server_name www.qiangdada.cn;
   
   location / {
     proxy_http_version 1.1;

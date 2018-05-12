@@ -45,7 +45,7 @@
 <template>
   <li class="list-item">
     <div class="entry">
-      <a :href="'http://118.25.109.133:81/entry/' + item.objectId" target="_blank" class="entry-link">
+      <a :href="'http://fe.qiangdada.cn/entry/' + item.objectId" target="_blank" class="entry-link">
         <div class="content-box">
           <div class="info-box">
             <slot></slot>
