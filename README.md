@@ -297,7 +297,7 @@ export default store
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 
 export default {
   async asyncData ({ store, error }) {
@@ -317,8 +317,11 @@ export default {
     })
   },
   methods: {
+    ...mapMutations([
+      'INCREMENT'
+    ]),
     handleClick () {
-      this.$store.commit('INCREMENT')
+      this.INCREMENT()
     }
   }
 }

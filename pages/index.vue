@@ -106,7 +106,7 @@
 <script>
 import AppLogo from '~/components/AppLogo'
 import VHeader from '~/components/home/header'
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 
 export default {
   components: {
@@ -142,8 +142,11 @@ export default {
     })
   },
   methods: {
+    ...mapMutations([
+      'INCREMENT'
+    ]),
     clickFn () {
-      this.$store.commit('INCREMENT')
+      this.INCREMENT()
     },
     goTop () {
       document.documentElement.scrollTop = 0
