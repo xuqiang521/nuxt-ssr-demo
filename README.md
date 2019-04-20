@@ -2,6 +2,23 @@
 
 **高仿掘金，项目中整合 vue + nuxt + axios + vuex + vue-router (nuxt 自带 vuex 和 vue-router)，一个基于 Nuxt 的服务器端渲染 Demo**
 
+## 项目构建步骤
+
+``` bash
+# 安装依赖
+$ npm install # Or yarn install
+
+# 启动服务，访问 localhost:3000
+$ npm run dev
+
+# 生成环境打包
+$ npm run build
+$ npm start
+
+# 打包需要部署的静态页面
+$ npm run generate
+```
+
 ### 前端交流群：<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=cbc7299cbc5ac88cc77dc76057ace6340d50847e18016a80aa33d45bb6e9462b">731175396</a>
 
 ### [项目线上地址](http://www.qiangdada.cn/)
@@ -503,24 +520,6 @@ pm2 start npm --name "nuxt-ssr-demo" -- run build
 ![](https://static.oschina.net/uploads/img/201804/04020526_BTg0.jpg)
 
 对于 pm2 用法，请小伙伴们输入 `pm2 --help` 然后自行查阅
-
-
-## 项目构建步骤
-
-``` bash
-# 安装依赖
-$ npm install # Or yarn install
-
-# 启动服务，访问 localhost:3000
-$ npm run dev
-
-# 生成环境打包
-$ npm run build
-$ npm start
-
-# 打包需要部署的静态页面
-$ npm run generate
-```
 
 ## 最后
 

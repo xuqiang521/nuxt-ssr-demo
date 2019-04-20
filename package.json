@@ -5,7 +5,7 @@
   "author": "qiangdada",
   "private": true,
   "scripts": {
-    "dev": "PORT=3000 nuxt",
+    "dev": "nuxt",
     "build": "npm run lint && nuxt build && npm start",
     "start": "nuxt start",
     "generate": "nuxt generate",
