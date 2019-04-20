@@ -7,14 +7,20 @@ module.exports = {
   parserOptions: {
     parser: 'babel-eslint'
   },
-  extends: 'standard',
-  // 校验 .vue 文件
-  plugins: [
-    'html'
+  extends: [
+    '@nuxtjs',
+    'plugin:nuxt/recommended',
+    'plugin:prettier/recommended',
+    'prettier',
+    'prettier/vue'
   ],
-  // 自定义规则
+  plugins: [
+    'prettier'
+  ],
+  // add your custom rules here
   rules: {
+    "prettier/prettier": "off",
+    "no-console": 0,
     "no-return-await": 0
-  },
-  globals: {}
+  }
 }

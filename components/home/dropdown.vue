@@ -1,3 +1,64 @@
+<template>
+  <div v-clickoutside="hide" class="drop-down">
+    <div class="phone-show-menu" @click="handleMenuClick">
+      <span>{{ title }}</span>
+      <v-icon name="arrow-down-b"></v-icon>
+    </div>
+    <ul 
+      class="phone-hide" 
+      :class="{
+        'show': show
+      }">
+      <li
+        v-for="(item, index) in items"
+        :key="index"
+        class="nav-item link-item"
+        @click="handleItemClick(item.title)">
+        <nuxt-link :to="{ name: item.name }">{{ item.title }}</nuxt-link>
+      </li>
+    </ul>
+  </div>
+</template>
+
+<script>
+import Clickoutside from '@/utils/dom/clickoutside'
+import { mapState } from 'vuex'
+
+export default {
+  name: 'VDropdown',
+  directives: { Clickoutside },
+  data () {
+    return {
+      show: false,
+      title: '首页',
+      items: [
+        { name: 'index', title: '首页' },
+        { name: 'books', title: '小册' },
+        { name: 'repos', title: '开源库' },
+        { name: 'events-all', title: '活动' }
+      ]
+    }
+  },
+  computed: {
+    ...mapState({
+      isPhone: state => state.isPhone
+    })
+  },
+  methods: {
+    handleMenuClick () {
+      this.show = !this.show
+    },
+    handleItemClick (title) {
+      this.show = false
+      this.title = title
+    },
+    hide () {
+      this.show = false
+    }
+  }
+}
+</script>
+
 <style lang="stylus" scoped>
 .drop-down {
   // display flex
@@ -44,64 +105,3 @@
   }
 }
 </style>
-
-<template>
-  <div class="drop-down" v-clickoutside="hide">
-    <div class="phone-show-menu" @click="handleMenuClick">
-      <span>{{ title }}</span>
-      <v-icon name="arrow-down-b"></v-icon>
-    </div>
-    <ul 
-      class="phone-hide" 
-      :class="{
-        'show': show
-      }">
-      <li
-        v-for="(item, index) in items"
-        :key="index"
-        class="nav-item link-item"
-        @click="handleItemClick(item.title)">
-        <nuxt-link :to="{ name: item.name }">{{ item.title }}</nuxt-link>
-      </li>
-    </ul>
-  </div>
-</template>
-
-<script>
-import Clickoutside from '~/utils/dom/clickoutside'
-import { mapState } from 'vuex'
-
-export default {
-  name: 'VDropdown',
-  directives: { Clickoutside },
-  data () {
-    return {
-      show: false,
-      title: '首页',
-      items: [
-        { name: 'index', title: '首页' },
-        { name: 'books', title: '小册' },
-        { name: 'repos', title: '开源库' },
-        { name: 'events-all', title: '活动' }
-      ]
-    }
-  },
-  computed: {
-    ...mapState({
-      isPhone: state => state.isPhone
-    })
-  },
-  methods: {
-    handleMenuClick () {
-      this.show = !this.show
-    },
-    handleItemClick (title) {
-      this.show = false
-      this.title = title
-    },
-    hide () {
-      this.show = false
-    }
-  }
-}
-</script>

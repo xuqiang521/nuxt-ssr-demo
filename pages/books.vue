@@ -1,3 +1,43 @@
+<template>
+  <div class="books-index-view">
+    <div class="list-wrap">
+      <div class="book-list">
+        <book-item v-for="(list, index) in lists" :key="index" :item="list"></book-item>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import BookItem from '@/components/books/book-item'
+
+export default {
+  components: {
+    BookItem
+  },
+  head () {
+    return {
+      title: '小册',
+      meta: [
+        { hid: 'books custom title', name: 'books', content: 'books custom title description' }
+      ]
+    }
+  },
+  async asyncData ({ store, error }) {
+    const param = {
+      src: 'web',
+      pageNum: 1
+    }
+    const [ res ] = await Promise.all([
+      store.dispatch('getListByLastTime', param)
+    ])
+    return {
+      lists: res.d
+    }
+  }
+}
+</script>
+
 <style lang="stylus" scoped>
 .books-index-view {
   margin 1.767rem auto 0
@@ -19,44 +59,3 @@
   }
 }
 </style>
-
-<template>
-  <div class="books-index-view">
-    <div class="list-wrap">
-      <div class="book-list">
-        <book-item v-for="(list, index) in lists" :key="index" :item="list"></book-item>
-      </div>
-    </div>
-  </div>
-</template>
-
-<script>
-import BookItem from '~/components/books/book-item'
-
-export default {
-  components: {
-    BookItem
-  },
-  head () {
-    return {
-      title: '小册',
-      meta: [
-        { hid: 'books custom title', name: 'books', content: 'books custom title description' }
-      ]
-    }
-  },
-  async asyncData ({ store, error }) {
-    const param = {
-      src: 'web',
-      pageNum: 1
-    }
-    let [ res ] = await Promise.all([
-      store.dispatch('getListByLastTime', param)
-    ])
-    return {
-      lists: res.d
-    }
-  }
-}
-</script>
-

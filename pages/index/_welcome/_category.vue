@@ -1,13 +1,6 @@
-<style lang="stylus" scoped>
-.entry-list {
-  width 100%
-  background #fff
-}
-</style>
-
 <template>
-  <ul class="entry-list" ref="entry">
-    <list-item v-for="(item, index) in entries" :key="index" :item="item">
+  <ul ref="entry" class="entry-list">
+    <list-item v-for="item in entries" :key="item.id" :item="item">
       <meta-row :item="item"></meta-row>
       <title-row :title="item.title"></title-row>
       <action-row :item="item"></action-row>
@@ -16,13 +9,15 @@
 </template>
 
 <script>
-import ListItem from '~/components/home/list-item'
-import TitleRow from '~/components/home/title-row'
-import MetaRow from '~/components/home/meta-row'
-import ActionRow from '~/components/home/action-row'
+import ListItem from '@/components/home/list-item'
+import TitleRow from '@/components/home/title-row'
+import MetaRow from '@/components/home/meta-row'
+import ActionRow from '@/components/home/action-row'
 
+let first = 10
 const getData = (store, params, self) => {
   let category = ''
+  console.log(params)
   switch (params.category) {
     case 'frontend':
       category = '5562b415e4b00c57d9b94ac8'
@@ -48,26 +43,26 @@ const getData = (store, params, self) => {
     default:
       break
   }
-  let param = {
-    category: category,
-    ab: 'welcome_3',
-    src: 'web'
+  const param = {
+    operationName: '',
+    query: '',
+    variables: {
+      first: first,
+      after: '',
+      category: category,
+      order: 'POPULAR',
+      tags: []
+    },
+    extensions: {
+      query: {
+        id: '653b587c5c7c8a00ddf67fc66f989d42'
+      }
+    }
   }
   return new Promise(resolve => {
-    store.dispatch('entries', param).then(res => {
-      if (self) {
-        const { d, m, s } = res
-        if (s === 1) {
-          self.entries.push(...d.entrylist)
-        } else {
-          self.$message({
-            message: m,
-            type: 'warning'
-          })
-        }
-        self.scrollStatus = true
-      }
-      resolve(res)
+    store.dispatch('recommend', param).then(res => {
+      const { items } = res.data.articleFeed
+      resolve(items)
     })
   })
 }
@@ -87,9 +82,9 @@ export default {
     }
   },
   async asyncData ({ store, params }) {
-    let res = await getData(store, params)
+    const { edges } = await getData(store, params)
     return {
-      entries: res.d.entrylist
+      entries: edges.map(item => { return item.node })
     }
   },
   mounted () {
@@ -103,9 +98,7 @@ export default {
     getFullPageData () {
       if (document.body.offsetHeight < window.innerHeight) {
         this.loadMoreData().then(res => {
-          if (res.s === 1) {
-            this.getFullPageData()
-          }
+          this.getFullPageData()
         })
       }
     },
@@ -115,16 +108,18 @@ export default {
     },
     loadMoreData () {
       return new Promise((resolve) => {
-        let $el = document.documentElement
-        let $entry = this.$refs.entry
-        let clienHeight = $el.clientHeight
-        let style = window.getComputedStyle ? window.getComputedStyle($entry, null) : null || $entry.currentStyle
-        let containerHeight = ~~style.height.split('px')[0] + 140
+        const $el = document.documentElement
+        const $entry = this.$refs.entry
+        const clienHeight = $el.clientHeight
+        const style = window.getComputedStyle ? window.getComputedStyle($entry, null) : null || $entry.currentStyle
+        const containerHeight = ~~style.height.split('px')[0] + 140
         // 设置【返回顶部】显示隐藏
         document.querySelector('.to-top-btn').classList[$el.scrollTop > 120 ? 'add' : 'remove']('show')
         // 滚动到一定高度，重新加载数据
         if ($el.scrollTop + clienHeight > containerHeight - 10 && this.scrollStatus) {
+          first += 10
           getData(this.$store, this.$route.params, this).then(res => {
+            this.entries = res.edges.map(item => { return item.node })
             resolve(res)
           })
         }
@@ -133,3 +128,10 @@ export default {
   }
 }
 </script>
+
+<style lang="stylus" scoped>
+.entry-list {
+  width 100%
+  background #fff
+}
+</style>

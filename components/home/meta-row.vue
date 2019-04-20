@@ -1,3 +1,53 @@
+<template>
+  <div class="info-row meta-row">
+    <ul class="meta-list">
+      <li v-show="item.hot && !showCategory" class="item hot">热</li>
+      <li v-show="item.hot && !showCategory" class="item recommended">荐</li>
+      <li v-show="item.type === 'post' && !showCategory" class="item post">专栏</li>
+      <li v-show="showCategory && item.category" class="item category">
+        <span :class="['category-title', item.category && item.category.title]">{{ item.category && item.category.name }}</span>
+      </li>
+      <li class="item username clickable">{{ item.user.username }}</li>
+      <li class="item time">{{ item.createdAt | format }}</li>
+      <li class="item">{{ item.tags.map(tag => { return tag.title }).join('/') }}</li>
+    </ul>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'MetaRow',
+  filters: {
+    format (v) {
+      const timeDistance = (new Date().getTime() - new Date(v).getTime()) / 1000
+      if ((timeDistance / 60) < 1) {
+        return `1分钟前`
+      } else if ((timeDistance / 60) < 60) {
+        return `${Math.floor((timeDistance / 60))}分钟前`
+      } else if ((timeDistance / 60 / 60) < 24) {
+        return `${Math.floor((timeDistance / 60 / 60))}小时前`
+      } else if ((timeDistance / 60 / 60 / 24) < 30) {
+        return `${Math.floor((timeDistance / 60 / 60 / 24))}天前`
+      } else if ((timeDistance / 60 / 60 / 24 / 30) < 12) {
+        return `${Math.floor((timeDistance / 60 / 60 / 24 / 30))}月前`
+      } else {
+        return `${Math.floor((timeDistance / 60 / 60 / 24 / 30 / 12))}年前`
+      }
+    }
+  },
+  props: {
+    item: {
+      type: Object,
+      default: () => {}
+    },
+    showCategory: {
+      type: Boolean,
+      default: false
+    }
+  }
+}
+</script>
+
 <style lang="stylus" scoped>
 .meta-row {
   font-size 1rem
@@ -72,53 +122,3 @@
   }
 }
 </style>
-
-<template>
-  <div class="info-row meta-row">
-    <ul class="meta-list">
-      <li class="item hot" v-show="item.hot && !showCategory">热</li>
-      <li class="item recommended" v-show="item.hot && !showCategory">荐</li>
-      <li class="item post" v-show="item.type === 'post' && !showCategory">专栏</li>
-      <li class="item category" v-show="showCategory">
-        <span :class="['category-title', item.category.title]">{{ item.category.name }}</span>
-      </li>
-      <li class="item username clickable">{{ item.user.username }}</li>
-      <li class="item time">{{ item.createdAt | format }}</li>
-      <li class="item">{{ item.viewsCount }} 次阅读</li>
-    </ul>
-  </div>
-</template>
-
-<script>
-export default {
-  name: 'MetaRow',
-  props: {
-    item: {
-      type: Object,
-      default: () => {}
-    },
-    showCategory: {
-      type: Boolean,
-      default: false
-    }
-  },
-  filters: {
-    format (v) {
-      let timeDistance = (new Date().getTime() - new Date(v).getTime()) / 1000
-      if ((timeDistance / 60) < 1) {
-        return `1分钟前`
-      } else if ((timeDistance / 60) < 60) {
-        return `${Math.floor((timeDistance / 60))}分钟前`
-      } else if ((timeDistance / 60 / 60) < 24) {
-        return `${Math.floor((timeDistance / 60 / 60))}小时前`
-      } else if ((timeDistance / 60 / 60 / 24) < 30) {
-        return `${Math.floor((timeDistance / 60 / 60 / 24))}天前`
-      } else if ((timeDistance / 60 / 60 / 24 / 30) < 12) {
-        return `${Math.floor((timeDistance / 60 / 60 / 24 / 30))}月前`
-      } else {
-        return `${Math.floor((timeDistance / 60 / 60 / 24 / 30 / 12))}年前`
-      }
-    }
-  }
-}
-</script>

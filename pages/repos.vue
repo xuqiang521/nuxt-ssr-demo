@@ -1,11 +1,3 @@
-<style lang="stylus" scoped>
-.repos-page {
-  font-size 20px
-  margin-top 1.767rem
-  text-align center
-}
-</style>
-
 <template>
   <div class="repos-page">
     开源库页面
@@ -24,3 +16,11 @@ export default {
   }
 }
 </script>
+
+<style lang="stylus" scoped>
+.repos-page {
+  font-size 20px
+  margin-top 1.767rem
+  text-align center
+}
+</style>

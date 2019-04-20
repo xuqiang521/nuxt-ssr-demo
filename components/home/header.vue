@@ -1,3 +1,63 @@
+<template>
+  <header class="v-header">
+    <div class="header-container">
+      <nuxt-link to="/">
+        <img src="~/assets/img/juejin.svg" alt="掘金" class="logo-img">
+      </nuxt-link>
+      <nav class="main-nav">
+        <ul class="nav-list">
+          <li class="main-nav-list">
+            <v-dropdown />
+          </li>
+          <li class="nav-item search">
+            <v-input />
+          </li>
+          <li class="nav-item submit">
+            <img src="~/assets/img/write.svg">
+            <span>写文章</span>
+          </li>
+          <li class="nav-item auth">
+            <span class="login">登录</span>
+            <span class="register">注册</span>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+</template>
+
+<script>
+import { mapState } from 'vuex'
+import VDropdown from './dropdown'
+
+export default {
+  name: 'VHeader',
+  components: {
+    VDropdown
+  },
+  data () {
+    return {
+      maxClientWidth: 980
+    }
+  },
+  computed: {
+    ...mapState({
+      isPhone: state => state.isPhone
+    })
+  },
+  mounted () {
+    const self = this
+    document.body.onresize = () => {
+      if (document.body.clientWidth > self.maxClientWidth) {
+        self.$store.commit('PCORPHONE', false)
+      } else {
+        self.$store.commit('PCORPHONE', true)
+      }
+    }
+  }
+}
+</script>
+
 <style lang="stylus">
 @import '../../assets/stylus/header'
 .v-header {
@@ -31,63 +91,3 @@
   }
 }
 </style>
-
-<template>
-  <header class="v-header">
-    <div class="header-container">
-      <nuxt-link to="/">
-        <img src="~/assets/img/juejin.svg" alt="掘金" class="logo-img">
-      </nuxt-link>
-      <nav class="main-nav">
-        <ul class="nav-list">
-          <li class="main-nav-list">
-            <v-dropdown />
-          </li>
-          <li class="nav-item search">
-            <v-input />
-          </li>
-          <li class="nav-item submit">
-            <img src="~/assets/img/write.svg">
-            <span>写文章</span>
-          </li>
-          <li class="nav-item auth">
-            <span class="login">登录</span>
-            <span class="register">注册</span>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-</template>
-
-<script>
-import VDropdown from './dropdown'
-import { mapState } from 'vuex'
-
-export default {
-  name: 'VHeader',
-  components: {
-    VDropdown
-  },
-  data () {
-    return {
-      maxClientWidth: 980
-    }
-  },
-  computed: {
-    ...mapState({
-      isPhone: state => state.isPhone
-    })
-  },
-  mounted () {
-    let self = this
-    document.body.onresize = () => {
-      if (document.body.clientWidth > self.maxClientWidth) {
-        self.$store.commit('PCORPHONE', false)
-      } else {
-        self.$store.commit('PCORPHONE', true)
-      }
-    }
-  }
-}
-</script>

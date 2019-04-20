@@ -1,3 +1,21 @@
+<template>
+  <div class="info-row title-row">
+    <span class="title">{{ title }}</span>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'TitleRow',
+  props: {
+    title: {
+      type: String,
+      default: ''
+    }
+  }
+}
+</script>
+
 <style lang="stylus" scoped>
 .title-row {
   margin .5rem 0 .8rem
@@ -21,21 +39,3 @@
   }
 }
 </style>
-
-<template>
-  <div class="info-row title-row">
-    <span class="title">{{ title }}</span>
-  </div>
-</template>
-
-<script>
-export default {
-  name: 'TitleRow',
-  props: {
-    title: {
-      type: String,
-      default: ''
-    }
-  }
-}
-</script>

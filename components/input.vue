@@ -1,3 +1,83 @@
+<template>
+  <div 
+    class="search-from"
+    :class="{
+      'focus': focused
+    }">
+    <input
+      v-model="currentValue"
+      class="search-input"
+      :type="type"
+      :placeholder="placeholder"
+      :maxlength="~~maxlength"
+      @keyup.enter="search"
+      @change="handleChange"
+      @input="handleInput"
+      @focus="handleFocus"
+      @blur="handleBlur">
+    <img v-show="type === 'search'" class="search-icon" :src="searchImg" alt="搜索">
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'VInput',
+  props: {
+    type: {
+      type: String,
+      default: 'search'
+    },
+    placeholder: {
+      type: String,
+      default: '搜索掘金'
+    },
+    maxlength: {
+      type: [Number, String],
+      default: 20
+    },
+    value: {
+      type: String,
+      default: ''
+    }
+  },
+  data () {
+    return {
+      currentValue: this.value,
+      focused: false,
+      searchImg: require('@/assets/img/search.svg')
+    }
+  },
+  watch: {
+    focused (val) {
+      if (val) {
+        this.searchImg = require('@/assets/img/active-search.svg')
+      } else {
+        this.searchImg = require('@/assets/img/search.svg')
+      }
+    }
+  },
+  methods: {
+    search () {
+      this.$emit('search', this.currentValue)
+    },
+    handleChange () {
+      this.$emit('change', this.currentValue)
+    },
+    handleInput () {
+      this.$emit('input', this.currentValue)
+    },
+    handleFocus (event) {
+      this.focused = true
+      this.$emit('focus', event)
+    },
+    handleBlur (event) {
+      this.focused = false
+      this.$emit('blur', event)
+    }
+  }
+}
+</script>
+
 <style lang="stylus" scoped>
 .search-from {
   display flex
@@ -28,84 +108,3 @@
   border 1px solid #007fff  
 }
 </style>
-
-<template>
-  <div 
-    class="search-from"
-    :class="{
-      'focus': focused
-    }">
-    <input 
-      class="search-input"
-      :type="type"
-      :placeholder="placeholder"
-      :maxlength="~~maxlength"
-      v-model="currentValue"
-      @keyup.enter="search"
-      @change="handleChange"
-      @input="handleInput"
-      @focus="handleFocus"
-      @blur="handleBlur">
-    <img v-show="type === 'search'" class="search-icon" :src="searchImg" alt="搜索">
-  </div>
-</template>
-
-<script>
-export default {
-  name: 'VInput',
-  data () {
-    return {
-      currentValue: this.value,
-      focused: false,
-      searchImg: require('~/assets/img/search.svg')
-    }
-  },
-  props: {
-    type: {
-      type: String,
-      default: 'search'
-    },
-    placeholder: {
-      type: String,
-      default: '搜索掘金'
-    },
-    maxlength: {
-      type: [Number, String],
-      default: 20
-    },
-    value: {
-      type: String,
-      default: ''
-    }
-  },
-  watch: {
-    focused (val) {
-      if (val) {
-        this.searchImg = require('~/assets/img/active-search.svg')
-      } else {
-        this.searchImg = require('~/assets/img/search.svg')
-      }
-    }
-  },
-  methods: {
-    search () {
-      this.$emit('search', this.currentValue)
-    },
-    handleChange () {
-      this.$emit('change', this.currentValue)
-    },
-    handleInput () {
-      this.$emit('input', this.currentValue)
-    },
-    handleFocus (event) {
-      this.focused = true
-      this.$emit('focus', event)
-    },
-    handleBlur (event) {
-      this.focused = false
-      this.$emit('blur', event)
-    }
-  }
-}
-</script>
-

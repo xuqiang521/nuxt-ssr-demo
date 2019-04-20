@@ -23,11 +23,14 @@ export default {
       },
       default: 'px'
     },
-    color: String
+    color: {
+      type: String,
+      default: ''
+    }
   },
   computed: {
     getStyle () {
-      let style = {}
+      const style = {}
       this.size && (style.fontSize = this.size + this.fontUnit)
       this.color && (style.color = this.color)
       return style

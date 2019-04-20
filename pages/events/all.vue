@@ -1,11 +1,3 @@
-<style lang="stylus" scoped>
-.events-page {
-  font-size 20px
-  margin-top 1.767rem
-  text-align center
-}
-</style>
-
 <template>
   <div class="events-page">
     活动页面
@@ -25,3 +17,10 @@ export default {
 }
 </script>
 
+<style lang="stylus" scoped>
+.events-page {
+  font-size 20px
+  margin-top 1.767rem
+  text-align center
+}
+</style>

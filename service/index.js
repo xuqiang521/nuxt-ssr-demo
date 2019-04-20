@@ -1,6 +1,6 @@
 import axios from 'axios'
 // import { Message } from 'element-ui'
-import qs from 'qs'
+// import qs from 'qs'
 import config from './config'
 
 if (process.server) {
@@ -12,7 +12,7 @@ const service = axios.create(config)
 // POST 传参序列化
 service.interceptors.request.use(
   config => {
-    if (config.method === 'post') config.data = qs.stringify(config.data)
+    // if (config.method === 'post') config.data = qs.stringify(config.data)
     return config
   },
   error => {
@@ -29,29 +29,4 @@ service.interceptors.response.use(
   }
 )
 
-export default {
-  post (url, data) {
-    console.log('post request url', url)
-    return service({
-      method: 'post',
-      url,
-      params: data
-    })
-  },
-  get (url, data) {
-    console.log('get request url', url)
-    return service({
-      method: 'get',
-      url,
-      params: data
-    })
-  },
-  delete (url, data) {
-    console.log('delete request url', url)
-    return service({
-      methods: 'delete',
-      url,
-      params: data
-    })
-  }
-}
+export default service
