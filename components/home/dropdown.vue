@@ -21,8 +21,8 @@
 </template>
 
 <script>
-import Clickoutside from '@/utils/dom/clickoutside'
 import { mapState } from 'vuex'
+import Clickoutside from '@/utils/dom/clickoutside'
 
 export default {
   name: 'VDropdown',
