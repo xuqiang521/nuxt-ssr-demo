@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "cross-env": "^5.2.0",
-    "nuxt": "^2.8.1",
+    "nuxt": "^2.15.8",
     "element-ui": "^2.4.11",
     "@nuxtjs/axios": "^5.3.6"
   },
